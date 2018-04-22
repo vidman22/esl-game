@@ -1,0 +1,41 @@
+/*.container {
+	width: 960px;
+
+
+}*/
+
+.login-form input{
+	border: none;
+	border-bottom: 2px solid #b3b2ca ;
+	height: 20px;
+	line-height: 20px;
+	font-size: 20px;
+	margin-top: 15px;
+	transition:all .23s ease-in;
+
+}
+
+.login-form input:focus{border-bottom:solid 2px #5d5d8a;outline:none}
+
+.login-form button:hover {
+	cursor: pointer;
+	background-color: #d58282;
+}
+
+.login-form button:disabled {
+	background-color: #d58282;
+}
+
+.team-one {
+	width: 45%;
+	float: left;
+	border: 2px;
+	margin: 2%;
+}
+
+.team-two {
+	width: 45%;
+	float: right;
+	border: 2px;
+	margin: 2%;
+}
