@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 // import axios from 'axios';
 import GPlayer from '../../components/GamePlayer/GamePlayer';
 import StartModal from '../../components/StartModal/StartModal';
+import FinishModal from '../../components/FinishModal/FinishModal';
 import Tile from '../../components/Tiles/Tiles';
+import Verbs from '../../IrregularVerbs';
 
 let currentTurnOne = 0;
 
@@ -18,43 +20,14 @@ export default class Play extends Component {
 		super(props);
 
 		this.state = {
-			irregularVerbs: [
-			  {
-				v1: "be",
-				v2: "was/were",
-				v3: "been"
-				},
-			  { 	
-				v1: "become",
-				v2: "became",
-				v3: "become"
-				},
-			  {	
-				v1: "begin",
-				v2: "began",
-				v3: "begun"
-				},
-			   {
-				v1: "bend",
-				v2: "bent",
-				v3: "bent"
-				},
-			  { 
-			    v1: "bite",
-				v2: "bit",
-				v3: "bitten"
-			  }, 
-			  { 
-			  	v1: "bleed",
-				v2: "bled",
-				v3: "bled"
-			  }
-		  ],
+		  irregularVerbs: [],
 		  activeWords1: [],
 		  activeWords2: [],
 		  activePlayerTeamOne: this.props.teamone[0],
 		  activePlayerTeamTwo: this.props.teamtwo[0],
 		  startModal: true,
+		  finishModal: false,
+		  winningTeam: "",
 		  scoreTeamOne: 0,
 		  scoreTeamTwo: 0,
 		  activeValue1: "",
@@ -73,7 +46,7 @@ export default class Play extends Component {
 
 	newBoard(team) {
 		console.log("new board");
-		let array = [...this.state.irregularVerbs];		
+		let array = Verbs;	
 		
 		
 		let currentIndex = array.length, temporaryValue, randomIndex;
@@ -88,7 +61,7 @@ export default class Play extends Component {
 			array[randomIndex] = temporaryValue;
 		}
 
-		array.slice(0, 6);
+		array = array.slice(0, 6);
 		
 		let arrayV2 =[];
 		for (let i=0 ; i < array.length; i ++ ) {
@@ -154,6 +127,13 @@ export default class Play extends Component {
 			activePlayerTeamOne: activePlayerTeamOne
 		   });
 
+			if (activePlayerTeamOne === undefined) {
+
+				this.finish('one');
+
+
+			}
+
 			
 
 
@@ -175,6 +155,10 @@ export default class Play extends Component {
 			 	activePlayerTeamTwo: activePlayerTeamTwo 
 			 });
 
+			if (activePlayerTeamTwo === undefined) {
+				this.finish('two');
+			}
+
 			
 		}
 	};
@@ -183,7 +167,22 @@ export default class Play extends Component {
 		this.setState({
 			startModal: false
 		});
-	}
+	};
+
+	finish = (team) => {
+		let winningTeam = "";
+		if (team === 'one') {
+			winningTeam = this.props.teamnames[this.props.activeteams[0]];
+		}
+		if ( team === 'two') {
+			winningTeam = this.props.teamnames[this.props.activeteams[1]];
+
+		}
+		this.setState({
+			finishModal: true,
+			winningTeam: winningTeam
+		});
+	};
 
 	handleClick = (tile, team, value, index) => {
 		console.log(value + " value clicked");
@@ -328,6 +327,7 @@ export default class Play extends Component {
 					</div>
 				</div>
 				<StartModal show={this.state.startModal} start={this.start} />
+				<FinishModal show={this.state.finishModal} finish={this.finish} team={this.state.winningTeam} />
 
 
 				
