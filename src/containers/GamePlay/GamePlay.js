@@ -66,9 +66,15 @@ export default class Play extends Component {
 	}
 
 	componentWillMount() {
+		this.newBoard('one');
+		this.newBoard('two');
+
+	}
+
+	newBoard(team) {
+		console.log("new board");
 		let array = [...this.state.irregularVerbs];		
 		
-		console.log("irregular verbs: ", array);
 		
 		let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -95,7 +101,7 @@ export default class Play extends Component {
 		
 		let newArray = arrayV2.concat(arrayV3);
 
-		console.log("new array ",  newArray );
+		
 
 		let currentIndex1 = newArray.length, temporaryValue1, randomIndex1;
 
@@ -113,15 +119,22 @@ export default class Play extends Component {
 
 		const activeWord = newArray[randomWordIndex].v1;
 
-		console.log("new array ",  newArray );
+		if ( team === 'one') {
+			console.log("board one array ", newArray)
+			this.setState({
+				activeWords1: newArray,
+				activeValue1: activeWord
+				
+			})
 
-		this.setState({
-			activeValue1: activeWord,
-			activeValue2: activeWord,
-			activeWords1: newArray,
-			activeWords2: newArray
-		})
-
+		} 
+		if (team === 'two') {
+			console.log("board two array ", newArray)
+			this.setState({
+				activeValue2: activeWord,
+				activeWords2: newArray
+			})
+		}
 
 	}
 
@@ -135,9 +148,15 @@ export default class Play extends Component {
 			let activePlayerTeamOne = teamOne[currentTurnOne];
 			console.log(activePlayerTeamOne);
 
+			this.newBoard(team);
+
 			this.setState({
 			activePlayerTeamOne: activePlayerTeamOne
 		   });
+
+			
+
+
 		} 
 		
 		if ( team === 'two') {
@@ -150,9 +169,13 @@ export default class Play extends Component {
 			let activePlayerTeamTwo = teamTwo[currentTurnTwo];
 			console.log(activePlayerTeamTwo);
 
+			this.newBoard(team);
+
 			 this.setState({ 
 			 	activePlayerTeamTwo: activePlayerTeamTwo 
 			 });
+
+			
 		}
 	};
 	
@@ -179,18 +202,24 @@ export default class Play extends Component {
 					const newActiveWord = newArray[Math.floor(Math.random() * newArray.length)].v1;
 
 					this.setState({
-						activeValue1: newActiveWord
+						activeValue1: newActiveWord,
+						scoreTeamOne: scoreTeamOne,
+						activeWords1: newArray
 					});
 
-				} else if ( newArray[0] === undefined) {
+				} 
+				 if (newArray[0] !== undefined) {
+					this.setState({
+						scoreTeamOne: scoreTeamOne,
+						activeWords1: newArray
+				 })
+				}
+				if ( newArray[0] === undefined) {
+					this.setState({
+						scoreTeamOne: scoreTeamOne
+					});
 					this.nextRound(team);
 				}
-			this.setState({
-				scoreTeamOne: scoreTeamOne,
-				activeWords1: newArray
-			})
-
-
 		}
 
 		if ( value === this.state.activeValue2 && team==='two') {
@@ -206,27 +235,36 @@ export default class Play extends Component {
 					const newActiveWord = newArray[Math.floor(Math.random() * newArray.length)].v1;
 
 					this.setState({
-						activeValue2: newActiveWord
+						activeValue2: newActiveWord,
+						scoreTeamTwo: scoreTeamTwo,
+						activeWords2: newArray
 					});
 
-				} else if ( newArray[0] === undefined) {
+				} if (newArray[0] !== undefined) {
+					this.setState({
+						scoreTeamTwo: scoreTeamTwo,
+						activeWords2: newArray
+					})
+				}
+				 if ( newArray[0] === undefined) {
+				 	this.setState({
+						scoreTeamTwo: scoreTeamTwo
+					});
 					this.nextRound(team);
 				}
-			this.setState({
-				scoreTeamTwo: scoreTeamTwo,
-				activeWords2: newArray
-			})
 
 
 		}
 		
 
-}
+};
 	
 
 
 
 	render() {
+
+		
 		
 		const teamOne = this.props.teamone.map((player, index) => {
 				return <GPlayer
