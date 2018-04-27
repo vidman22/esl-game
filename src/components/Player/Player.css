@@ -34,6 +34,6 @@ hr {
 	margin: 2px;
 }
 
-img:hover {
+.Player img:hover {
 	cursor: pointer;
 }

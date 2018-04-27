@@ -7,22 +7,35 @@
 .login-form input{
 	border: none;
 	border-bottom: 2px solid #b3b2ca ;
-	height: 20px;
+	height: 26px;
 	line-height: 20px;
 	font-size: 20px;
-	margin-top: 15px;
+	margin-top: 10px;
 	transition:all .23s ease-in;
 
 }
 
 .login-form input:focus{border-bottom:solid 2px #5d5d8a;outline:none}
 
-.login-form button:hover {
+button {
+	position: relative;
+	display: inline-block;
+	width: 9%; 
+	height: 40px; 
+	border-radius: 10px;
+	background-color: #4970bd;
+	font-size: 16px;
+	color: white;
+	margin: 4px;
+
+} 
+
+ button:hover {
 	cursor: pointer;
 	background-color: #d58282;
 }
 
-.login-form button:disabled {
+ button:disabled {
 	background-color: #d58282;
 }
 
@@ -38,4 +51,22 @@
 	float: right;
 	border: 2px;
 	margin: 2%;
+}
+
+.first{
+	display: inline-block;
+	position: fixed;
+	margin-top: 20px;
+	bottom: 20px;
+	right: 50%;
+
+}
+
+.second{
+	display: inline-block;
+	position: fixed;
+	margin-top: 20px;
+	bottom: 20px;
+	left: 50%;
+
 }

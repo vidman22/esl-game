@@ -10,6 +10,10 @@
 
 }
 
-.tile: hover {
+.tile:hover {
 	cursor: pointer;
+	border: 1px solid #d58282;
+	box-shadow: 1px 3px 3px #ccc;
+	color: #d58282;
 }
+

@@ -13,6 +13,17 @@
     transition: all 0.3s ease-out;
 }
 
+.Modal ol {
+    text-align: left;
+    margin-left: 20%;
+    font-size: 26px;
+
+}
+
+.Modal hr {
+    width: 70%;
+}
+
 .Start {
     display: inline-block;
     width: 250px;

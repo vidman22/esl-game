@@ -28,6 +28,7 @@ export default class Play extends Component {
 		  startModal: true,
 		  finishModal: false,
 		  winningTeam: "",
+		  winningPlayers: [],
 		  scoreTeamOne: 0,
 		  scoreTeamTwo: 0,
 		  activeValue1: "",
@@ -171,16 +172,29 @@ export default class Play extends Component {
 
 	finish = (team) => {
 		let winningTeam = "";
+		let winningPlayers = [];
+		let winningScore = "";
+		let losingScore = "";
+
 		if (team === 'one') {
 			winningTeam = this.props.teamnames[this.props.activeteams[0]];
+			winningPlayers = [...this.props.teamone];
+			winningScore = this.state.scoreTeamOne;
+			losingScore = this.state.scoreTeamTwo;
 		}
 		if ( team === 'two') {
 			winningTeam = this.props.teamnames[this.props.activeteams[1]];
+			winningPlayers = [...this.props.teamtwo];
+			winningScore = this.state.scoreTeamTwo;
+			losingScore = this.state.scoreTeamTwo;
 
 		}
 		this.setState({
 			finishModal: true,
-			winningTeam: winningTeam
+			winningTeam: winningTeam,
+			winningPlayers: winningPlayers,
+			winningScore: winningScore,
+			losingScore: losingScore
 		});
 	};
 
@@ -312,7 +326,7 @@ export default class Play extends Component {
 					{teamOne}
 					<div>Score: {this.state.scoreTeamOne}</div>
 					<div>
-						<h2>{this.state.activeValue1}</h2>
+						<h1>{this.state.activeValue1}</h1>
 						{firstBoard}
 					</div>
 				</div>
@@ -322,12 +336,18 @@ export default class Play extends Component {
 					{teamTwo}
 					<div>Score: {this.state.scoreTeamTwo}</div>
 					<div>
-						<h2>{this.state.activeValue2}</h2>
+						<h1>{this.state.activeValue2}</h1>
 						{secondBoard}
 					</div>
 				</div>
 				<StartModal show={this.state.startModal} start={this.start} />
-				<FinishModal show={this.state.finishModal} finish={this.finish} team={this.state.winningTeam} />
+				<FinishModal show={this.state.finishModal} 
+							 finish={this.finish} 
+							 team={this.state.winningTeam} 
+							 players={this.state.winningPlayers}
+							 winningScore={this.state.winningScore}
+							 losingScore={this.state.losingScore}
+							  />
 
 
 				

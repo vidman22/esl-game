@@ -32,16 +32,21 @@ export default class Lobby extends Component {
 
 		return (
 					<div className="container">	
+
 						<div className="team-one">
 							 <h2>{this.props.teamnames[this.props.activeteams[0]]}</h2>
 							 {teamOne}
 						</div>
+						
 						<div className="team-two">
 							<h2>{this.props.teamnames[this.props.activeteams[1]]}</h2>
 							 {teamTwo}
 						</div>
-						<button>Back</button>
-						<button onClick={this.props.startgame} >Start Game</button>
+						<div>
+							<button className="first" onClick={this.props.back}>Back</button>
+							<button className="second" onClick={this.props.startgame}>Start Game</button>
+						</div>
+						
 					</div>
 
 				)

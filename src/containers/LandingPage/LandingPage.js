@@ -127,7 +127,42 @@ export default class LandingPage extends Component {
 		}
 	}
 
+	back = () => {
+		this.setState({
+			action: 'input'
+		});
+	};
+
 	startGame = () => {
+			const teamOne = [...this.state.teamOne];
+			const teamTwo = [...this.state.teamTwo]; 
+		 if (teamOne.length < teamTwo.length) {
+		 	const diff = teamTwo.length - teamOne.length;
+
+		 	let i = 0;
+		 	while (teamOne.length != teamTwo.length) {
+		 		teamOne.push(teamOne[i]);
+		 		i++;
+		 	}
+
+		 	this.setState({
+		 		teamOne: teamOne
+		 	})
+		 }
+		 if (teamTwo.length < teamOne.length) {
+		 	const diff = teamOne.length - teamTwo.length;
+
+		 	let i = 0;
+		 	while (teamTwo.length != teamOne.length) {
+		 		teamTwo.push(teamTwo[i]);
+		 		i++;
+		 	}
+
+		 	this.setState({
+		 		teamTwo: teamTwo
+		 	})
+		 }
+
 		this.setState({
 			action: 'game'
 		})
@@ -165,6 +200,7 @@ export default class LandingPage extends Component {
 							activeteams={this.state.activeTeams}
 							startgame={this.startGame}
 							switch={this.switchTeams}
+							back={this.back}
 						/>
 					</div>
 					)

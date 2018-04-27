@@ -31,9 +31,10 @@ export default class Create extends Component {
 								onChange={this.props.handlechange}
 								placeholder={'Name'}
 							/>
-							<button type="submit" name="submitPlayer" onClick={this.props.handlesubmit}>Add</button> 
+							 
 						</form>
-					  <button disabled={this.props.disablebutton}  onClick={this.props.generateteams}>Shuffle Teams</button>
+						<button type="submit" name="submitPlayer" onClick={this.props.handlesubmit}>Add</button>
+					  	<button disabled={this.props.disablebutton}  onClick={this.props.generateteams}>Shuffle</button>
 					  <div>
 
 					    {players}
